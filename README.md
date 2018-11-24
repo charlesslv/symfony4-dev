@@ -6,7 +6,7 @@ Small and simply project to test new features of Symfony 4.
 
 Create database
 ```sh
-php bin/console doctrine:database:creat
+php bin/console doctrine:database:create
 ```
 Install dependencies
 ```sh
