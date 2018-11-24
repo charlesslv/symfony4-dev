@@ -1,7 +1,7 @@
 {% import "/extra/macro/btn.html.twig" as btn %}
 {% extends 'base.html.twig' %}
 
-{% block title %}Album index{% endblock %}
+{% block title %}User index{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,9 +9,9 @@
             <section class="jumbotron text-center">
                 <div class="container">
                     <h1 class="jumbotron-heading">User </h1>
-                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                    <p class="lead text-muted">You can manage users here.</p>
                     <p>
-                        <a href="{{ path('user_new') }}" class="btn btn-primary my-2">Create new</a>
+                        <a href="{{ path('user_new') }}" class="btn btn-outline-primary my-2">Create new</a>
                     </p>
                 </div>
             </section>
@@ -19,8 +19,8 @@
     </div>
     <div class="row">
         <div class="col-12">
-                <table class="table">
-                    <thead>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
                         <tr>
                             <th>Id</th>
                             <th>Email</th>

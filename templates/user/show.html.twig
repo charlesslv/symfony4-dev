@@ -6,8 +6,7 @@
     <div class="row">
         <div class="col-12">
             <h1>User</h1>
-
-            <table class="table">
+            <table class="table table-bordered">
                 <tbody>
                 <tr>
                     <th>Id</th>
@@ -16,6 +15,12 @@
                 <tr>
                     <th>Name</th>
                     <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Rôle</th>
+                    {% for role in user.roles %}
+                        <td>{{ role }}</td>
+                    {% endfor %}
                 </tr>
                 </tbody>
             </table>
