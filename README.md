@@ -2,11 +2,20 @@
 
 Small and simply project to test new features of Symfony 4.
 
-##Doing
+## Doing
 
-- php bin/console doctrine:database:create
-- composer install
-- bin/fixtures
+Create database
+```sh
+php bin/console doctrine:database:creat
+```
+Install dependencies
+```sh
+composer install
+```
+Install fake data
+```
+bin/fixtures
+```
 
 
 ### Test as user
