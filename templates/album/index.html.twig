@@ -1,0 +1,55 @@
+{% import '/extra/macro/btn.html.twig' as btn %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Album index{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Album index</h1>
+                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the
+                        creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it
+                        entirely.</p>
+                    <p>
+                        {#<a href="{{ path('album_new') }}" class="btn btn-primary my-2">Create new</a>#}
+                        {{ btn.btn_card('ROLE_AUTHOR_ALBUM', path('album_new'), 'primary', 'Create new', 'Create New') }}
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                {% for album in albums %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="{{ album.name }}">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ album.name }}</h4>
+                                <p class="card-text">{{ album.description }}</p>
+                                <p class="card-text">Price : {{ album.price }}€</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        {{ btn.btn_card(true, path('album_show', {'id': album.id}), 'primary', 'View', 'view') }}
+                                        {{ btn.btn_card('ROLE_EDITOR_ALBUM', path('album_edit', {'id': album.id}), 'success', 'Edit', 'edit') }}
+                                        {{ btn.btn_card('ROLE_MANAGER_ALBUM', path('album_delete', {'id': album.id}), 'danger', 'Delete', 'delete') }}
+                                    </div>
+                                    <small class="text-muted">{{ album.category }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        No records found
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

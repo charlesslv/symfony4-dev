@@ -1,0 +1,9 @@
+<form method="post" action="{{ path('album_delete', {'id': album.id}) }}">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ album.id) }}">
+    <div class="alert alert-danger" role="alert">
+        Are you sure to delete '{{ album.name }}' ?
+    </div>
+    <a href="{{ path('album_index') }}" class="btn btn-sm btn-outline-secondary">Cancel</a>
+    <button class="btn btn-sm btn-outline-danger">Delete</button>
+</form>

@@ -1,0 +1,54 @@
+{% import "/extra/macro/btn.html.twig" as btn %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Album index{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">User </h1>
+                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                    <p>
+                        <a href="{{ path('user_new') }}" class="btn btn-primary my-2">Create new</a>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {{ btn.btn_list("ROLE_EDITOR_USER", path('user_show', {'id': user.id}), "info", "view", "View") }}
+                                    {{ btn.btn_list(["ROLE_EDITOR_USER", user], path('user_edit', {'id': user.id}), "success", "edit", "Edit") }}
+                                    {{ btn.btn_list("ROLE_MANAGER_USER", path('user_delete', {'id': user.id}), "danger", "delete", "Delete") }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">
+                                    <div class="alert alert-danger" role="alert">
+                                        No records found
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+php bin/console make:user
+
