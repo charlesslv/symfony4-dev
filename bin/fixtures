@@ -5,7 +5,7 @@ echo ""
 echo "[1;93m----------- MAKE FIXTURES  [00m"
 echo ""
 
-php bin/console doctrine:fixtures:load --append
+php bin/console doctrine:fixtures:load
 
 echo ""
 echo ""
