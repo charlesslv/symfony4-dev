@@ -6,8 +6,6 @@ Small and simply project to test new features of Symfony 4.
 
 > **Copy/Past .env.dist and rename it to .env and edit it to add connection information of your database.**
 
-<span style="color:red">red</span>
-
 Create database
 ```sh
 php bin/console doctrine:database:create
