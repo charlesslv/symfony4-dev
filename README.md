@@ -5,6 +5,7 @@ Small and simply project to test new features of Symfony 4.
 ## Doing
 
 `Copy Past .env.dist and rename it to .env and edit it to add connection information of your database.`
+`${package.json.version}`
 
 Create database
 ```sh
