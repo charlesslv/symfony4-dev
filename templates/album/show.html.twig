@@ -15,7 +15,7 @@
                     <td>{{ album.id }}</td>
                 </tr>
                 <tr>
-                    <th>Price</th>
+                    <th>{{ 'Price'|trans }}</th>
                     <td>{{ album.price }}€</td>
                 </tr>
                 <tr>
@@ -23,11 +23,11 @@
                     <td>{{ album.description }}</td>
                 </tr>
                 <tr>
-                    <th>Name</th>
+                    <th>{{ 'Name'|trans }}</th>
                     <td>{{ album.name }}</td>
                 </tr>
                 <tr>
-                    <th>Category</th>
+                    <th>{{ 'Category'|trans }}</th>
                     <td>{{ album.category }}</td>
                 </tr>
                 </tbody>
@@ -35,5 +35,5 @@
         </div>
     </div>
 
-    <a href="{{ path('album_index') }}" class="btn btn-sm btn-outline-primary">back to list</a>
+    <a href="{{ path('album_index') }}" class="btn btn-sm btn-outline-primary">{{ 'Back to list'|trans }}</a>
 {% endblock %}

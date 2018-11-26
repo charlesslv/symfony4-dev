@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
+{% import '/extra/macro/btn.html.twig' as btn %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}{{ 'Home'|trans }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="row">
+        <div class="col-12">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">{{ 'The last Albums'|trans }}</h1>
+                    <p class="lead text-muted">{{ 'List of all albums.'|trans }}</p>
+                    <p>
+                        {{ btn.btn_card(true, path('album_index'), 'primary', 'see-all', 'See all') }}
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                {% for album in albums %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img class="card-img-top"
+                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
+                                 alt="{{ album.name }}">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ album.name }}</h4>
+                                <p class="card-text">{{ album.description }}</p>
+                                <p class="card-text">Price : {{ album.price }}€</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        {{ btn.btn_card(true, path('album_show', {'id': album.id}), 'primary', 'view', 'View') }}
+                                        {{ btn.btn_card('ROLE_EDITOR_ALBUM', path('album_edit', {'id': album.id}), 'success', 'edit', 'Edit') }}
+                                        {{ btn.btn_card('ROLE_MANAGER_ALBUM', path('album_delete', {'id': album.id}), 'danger', 'delete', 'Delete') }}
+                                    </div>
+                                    <small class="text-muted">{{ album.category }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        No records found
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

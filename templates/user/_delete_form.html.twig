@@ -2,8 +2,8 @@
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
     <div class="alert alert-danger" role="alert">
-        Are you sure you want to delete this User : {{ user.email }}?'
+        {{ 'Are you sure you want to delete this User:'|trans }} {{ user.email }}?'
     </div>
-    <a href="{{ path('user_index') }}" class="btn btn-sm btn-outline-secondary">Cancel</a>
-    <button class="btn btn-sm btn-outline-danger">Delete</button>
+    <a href="{{ path('user_index') }}" class="btn btn-sm btn-outline-secondary">{{ 'Cancel'|trans }}</a>
+    <button class="btn btn-sm btn-outline-danger">{{ 'Delete'|trans }}</button>
 </form>

@@ -51,6 +51,11 @@ class Album
     private $category;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createAt;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -130,6 +135,25 @@ class Album
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getCreateAt(): ?\DateTimeInterface
+    {
+        return $this->createAt;
+    }
+
+    /**
+     * @param \DateTimeInterface $createAt
+     * @return Album
+     */
+    public function setCreateAt(\DateTimeInterface $createAt): self
+    {
+        $this->createAt = $createAt;
 
         return $this;
     }

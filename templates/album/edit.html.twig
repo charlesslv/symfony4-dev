@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Album{% endblock %}
+{% block title %}{{ 'Edit Album'|trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-12">
-            <h1>Edit Album</h1>
+            <h1>{{ 'Edit Album'|trans }}</h1>
 
             {{ include('album/form.html.twig', {'button_label': 'Update'}) }}
 
-            <a href="{{ path('album_index') }}" class="btn btn-sm btn-outline-primary">back to list</a>
+            <a href="{{ path('album_index') }}" class="btn btn-sm btn-outline-primary">{{ 'Back to list'|trans }}</a>
         </div>
     </div>
 {% endblock %}

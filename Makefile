@@ -15,9 +15,8 @@ first-install: ## First install (DB/Schema/fixtures)
 	$(CONSOLE) cache:clear --env=prod
 
 fixtures: ## Replay fixtures
-	$(CONSOLE) doctrine:schema:drop --force
 	$(CONSOLE) doctrine:schema:update --force
-	$(CONSOLE) doctrine:fixtures:load -vvv --no-interaction
+	$(CONSOLE) doctrine:fixtures:load
 
 schema: ## Update database schema
 	$(CONSOLE) doctrine:schema:update --force
@@ -25,6 +24,18 @@ schema: ## Update database schema
 cache: .env vendor
 	$(CONSOLE) cache:clear
 
+##
+##For dev
+##-------------
+
+create-entity: ## To create entity
+	$(CONSOLE) ma:en
+
+create-user: ## To create User entity
+	$(CONSOLE) make:user
+
+build-login-form: ## To build a login form
+	$(CONSOLE) make:auth
 ##
 
 # DEFAULT

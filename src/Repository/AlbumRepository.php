@@ -40,15 +40,31 @@ class AlbumRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Album
+    /**
+     * @param $name
+     * @return Album|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneBySomeField($name): ?Album
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('a.name = :name')
+            ->setParameter('name', $name)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
-    */
+
+    /**
+     * @return mixed
+     */
+    public function findThreeForHome()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.createAt', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

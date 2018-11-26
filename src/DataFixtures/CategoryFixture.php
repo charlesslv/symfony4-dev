@@ -18,17 +18,17 @@ class CategoryFixture extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create();
+        $faker = Factory::create('fr_FR');
 
-        for($i=1; $i<4; $i++) {
-            $categorie = new Category();
-            $categorie->setName("Cat $i");
-            $categorie->setDescription($faker->words("15", true));
-            $manager->persist($categorie);
+        for ($i = 1; $i < 4; $i++) {
+            $category = new Category();
+            $category->setName("Cat $i");
+            $category->setDescription($faker->realText('100'));
+            $manager->persist($category);
 
             // Reference d'access a cette categorie
             // par les autres classes fixtures
-            $this->addReference("CAT_$i", $categorie);
+            $this->addReference("CAT_$i", $category);
         }
         $manager->flush();
     }

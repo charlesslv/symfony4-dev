@@ -50,8 +50,8 @@ class CategoryController extends AbstractController
         }
 
         return $this->render('category/new.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
+            'category'  => $category,
+            'form'      => $form->createView(),
         ]);
     }
 
@@ -87,8 +87,8 @@ class CategoryController extends AbstractController
         }
 
         return $this->render('category/edit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
+            'category'  => $category,
+            'form'      => $form->createView(),
         ]);
     }
 
@@ -98,16 +98,20 @@ class CategoryController extends AbstractController
      * @return Response
      * @Security("has_role('ROLE_MANAGER_CATEGORY')")
      *
-     * @Route("/{id}", name="category_delete", methods="DELETE")
+     * @Route("/{id}/delete", name="category_delete", methods="GET|DELETE")
      */
     public function delete(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($category);
             $em->flush();
+
+            return $this->redirectToRoute('category_index');
         }
 
-        return $this->redirectToRoute('category_index');
+        return $this->render('category/delete.html.twig', [
+            'category' => $category,
+        ]);
     }
 }
