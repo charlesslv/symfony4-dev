@@ -8,12 +8,11 @@ COMPOSER        = composer
 ##-------------
 
 first-install: ## First install (DB/Schema/fixtures)
-	$(CONSOLE) doctrine:database:drop --force
+	$(COMPOSER) install
 	$(CONSOLE) doctrine:database:create
 	$(CONSOLE) doctrine:schema:update --force
 	$(CONSOLE) doctrine:fixtures:load
 	$(CONSOLE) cache:clear --env=prod
-	$(COMPOSER) install
 
 fixtures: ## Replay fixtures
 	$(CONSOLE) doctrine:schema:drop --force
