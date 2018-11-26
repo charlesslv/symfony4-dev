@@ -6,19 +6,15 @@ Small and simply project to test new features of Symfony 4.
 
 > **Copy/Past .env.dist and rename it to .env and edit it to add connection information of your database.**
 
-Create database
+Install project
 ```sh
-php bin/console doctrine:database:create
-```
-Install dependencies
-```sh
-composer install
-```
-Install fake data
-```
-bin/fixtures
+make first-install
 ```
 
+See all command
+```sh
+make help
+```
 
 ### Test as user
 ?_switch_user=user@gmail.com
