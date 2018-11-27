@@ -111,7 +111,7 @@ class AlbumController extends AbstractController
     {
         $id = $album->getId();
 
-        if ($this->isCsrfTokenValid('delete' . $id, $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid($id, $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($album);
             $em->flush();
