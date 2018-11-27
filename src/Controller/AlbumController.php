@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Form\AlbumType;
 use App\Repository\AlbumRepository;
+use App\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,13 +19,17 @@ class AlbumController extends AbstractController
 {
     /**
      * @param AlbumRepository $albumRepository
+     * @param CategoryRepository $categoryRepository
      * @return Response
      *
      * @Route("/", name="album_index", methods="GET")
      */
-    public function index(AlbumRepository $albumRepository): Response
+    public function index(AlbumRepository $albumRepository, CategoryRepository $categoryRepository): Response
     {
-        return $this->render('album/index.html.twig', ['albums' => $albumRepository->findAll()]);
+        return $this->render('album/index.html.twig', [
+            //'albums'        => $albumRepository->findAll(),
+            'categories'    => $categoryRepository->findAll()
+        ]);
     }
 
     /**
@@ -104,7 +109,9 @@ class AlbumController extends AbstractController
      */
     public function delete(Request $request, Album $album): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $album->getId(), $request->request->get('_token'))) {
+        $id = $album->getId();
+
+        if ($this->isCsrfTokenValid('delete' . $id, $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($album);
             $em->flush();
@@ -114,6 +121,28 @@ class AlbumController extends AbstractController
 
         return $this->render('album/delete.html.twig', [
             'album' => $album,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param AlbumRepository $albumRepository
+     * @return Response
+     *
+     * @Route("/albums-filter", name="albums_filter", methods="POST")
+     */
+    public function albums(Request $request, AlbumRepository $albumRepository): Response
+    {
+        $category     = $request->get('category');
+        //$page       = !empty($request->get('page')) ? $request->get('page') : 1;
+
+        //$count = $pageRepository->countAllCaseStudiesByFilters($region, $type, $project, $page + 1);
+        $albums = $albumRepository->findAllAlbumsByFilters($category);
+
+        return $this->render('album/albums.html.twig', [
+            'albums'         => $albums,
+            //'has_next_page' => $count > 0,
+            //'next_page'     => $page + 1
         ]);
     }
 }

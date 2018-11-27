@@ -1,6 +1,8 @@
 {% macro btn_card(role, link, class, title, text) %}
     {% spaceless %}
-        {% if (is_boolean(role) and role == true) or (role == null) or (role is not null and is_array(role) == false and is_granted(role)) or (role is not null and is_array(role) and is_granted(role[0], role[1]))  %}
+        {% if (is_boolean(role) and role == true) or (role == null)
+            or (role is not null and is_array(role) == false and is_granted(role))
+            or (role is not null and is_array(role) and is_granted(role[0], role[1]))  %}
             <a class="btn btn-sm btn-outline-{{- class|default('success') -}}" title="{{- title|default('add') -}}" href="{{- link -}}">
                 {{- text|default('add')|trans -}}
             </a>
@@ -11,7 +13,9 @@
 
 {% macro btn_list(role, link, class, title, text) %}
     {% spaceless %}
-        {% if (is_boolean(role) and role == true) or (role == null) or (role is not null and is_array(role) == false and is_granted(role)) or (role is not null and is_array(role) and is_granted(role[0], role[1]))  %}
+        {% if (is_boolean(role) and role == true) or (role == null)
+            or (role is not null and is_array(role) == false and is_granted(role))
+            or (role is not null and is_array(role) and is_granted(role[0], role[1]))  %}
             <a class="btn btn-sm btn-{{- class|default('success') -}}" title="{{- title|default('add') -}}" href="{{- link -}}">
                 {{- text|default('add')|trans -}}
             </a>
@@ -26,7 +30,9 @@
 
 {% macro btn_main_menu(role, link, text) %}
     {% spaceless %}
-        {% if (is_boolean(role) and role == true) or (role == null) or (role is not null and is_array(role) == false and is_granted(role)) or (role is not null and is_array(role) and is_granted(role[0], role[1]))  %}
+        {% if (is_boolean(role) and role == true) or (role == null)
+            or (role is not null and is_array(role) == false and is_granted(role))
+            or (role is not null and is_array(role) and is_granted(role[0], role[1]))  %}
             <li class="nav-item active">
                 <a class="nav-link" href="{{- link -}}">{{- text|trans }} <span class="sr-only">(current)</span></a>
             </li>
