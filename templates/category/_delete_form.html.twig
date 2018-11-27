@@ -1,6 +1,6 @@
 <form method="post" action="{{ path('category_delete', {'id': category.id}) }}">
     <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token(category.id) }}">
     <div class="alert alert-danger" role="alert">
         {{ 'Are you sure to delete'|trans }} '{{ category.name }}' ?
     </div>
