@@ -102,7 +102,9 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
+        $id = $category->getId();
+
+        if ($this->isCsrfTokenValid($id, $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($category);
             $em->flush();
