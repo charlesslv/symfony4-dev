@@ -10,6 +10,10 @@ use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
+/**
+ * Class Kernel
+ * @package App
+ */
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;

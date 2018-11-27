@@ -1,4 +1,5 @@
 # Project to explore new features of Symfony 4
+[![Maintainability](https://api.codeclimate.com/v1/badges/939fb343b8872d75a6b3/maintainability)](https://codeclimate.com/github/charlesslv/symfony4_dev/maintainability)
 
 Small and simply project to test new features of Symfony 4.
 
