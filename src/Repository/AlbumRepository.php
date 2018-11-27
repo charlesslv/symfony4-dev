@@ -51,8 +51,7 @@ class AlbumRepository extends ServiceEntityRepository
             ->andWhere('a.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     /**
@@ -64,7 +63,24 @@ class AlbumRepository extends ServiceEntityRepository
             ->orderBy('a.createAt', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
+    }
+
+    /**
+     * @param $category
+     * @return mixed
+     */
+    public function findAllAlbumsByFilters($category)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a');
+
+        if ($category !== 'all') {
+            $qb->leftJoin('a.category', 'ac')
+                ->andWhere('ac.name = :cat')
+                ->setParameter('cat', $category);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }
