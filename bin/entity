@@ -1,4 +1,0 @@
-#!/bin/sh
-
-php bin/console ma:en
-

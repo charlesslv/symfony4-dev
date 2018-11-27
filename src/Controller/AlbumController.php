@@ -41,6 +41,7 @@ class AlbumController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $album->setCreateAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($album);
             $em->flush();
@@ -63,7 +64,9 @@ class AlbumController extends AbstractController
      */
     public function show(Album $album): Response
     {
-        return $this->render('album/show.html.twig', ['album' => $album]);
+        return $this->render('album/show.html.twig', [
+            'album' => $album
+        ]);
     }
 
     /**
@@ -101,7 +104,7 @@ class AlbumController extends AbstractController
      */
     public function delete(Request $request, Album $album): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$album->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $album->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($album);
             $em->flush();

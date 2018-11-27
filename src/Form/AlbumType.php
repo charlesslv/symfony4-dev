@@ -24,8 +24,7 @@ class AlbumType extends AbstractType
             ->add('price', MoneyType::class)
             ->add('description')
             ->add('name')
-            ->add('category')
-        ;
+            ->add('category');
     }
 
     /**

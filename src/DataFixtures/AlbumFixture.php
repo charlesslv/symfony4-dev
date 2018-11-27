@@ -19,14 +19,15 @@ class AlbumFixture extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create();
+        $faker = Factory::create('fr_FR');
 
-        for($i=1; $i<10; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $album = new Album();
-            $album->setName($faker->words("3", true));
-            $album->setDescription($faker->words("150", true));
+            $album->setName(rtrim($faker->realText(20), '.'));
+            $album->setDescription($faker->realText('500'));
             $album->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 0.99, $max = 65));
-            $album->setCategory($this->getReference("CAT_".mt_rand(1,3)));
+            $album->setCategory($this->getReference("CAT_" . mt_rand(1, 3)));
+            $album->setCreateAt(new \DateTime());
             $manager->persist($album);
         }
 

@@ -32,7 +32,7 @@ class Category
     /**
      * @Assert\NotBlank()
      * @Assert\Length(
-     *     min="50",
+     *     min="10",
      *     max="255"
      * )
      * @ORM\Column(type="string", length=255)

@@ -1,15 +1,15 @@
 {% import '/extra/macro/btn.html.twig' as btn %}
 {% extends 'base.html.twig' %}
 
-{% block title %}Album index{% endblock %}
+{% block title %}Albums{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-12">
             <section class="jumbotron text-center">
                 <div class="container">
-                    <h1 class="jumbotron-heading">Album index</h1>
-                    <p class="lead text-muted">List of all albums.</p>
+                    <h1 class="jumbotron-heading">Albums</h1>
+                    <p class="lead text-muted">{{ 'List of all albums.'|trans }}</p>
                     <p>
                         {#<a href="{{ path('album_new') }}" class="btn btn-primary my-2">Create new</a>#}
                         {{ btn.btn_card('ROLE_AUTHOR_ALBUM', path('album_new'), 'primary', 'Create new', 'Create New') }}
@@ -25,16 +25,18 @@
                 {% for album in albums %}
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="{{ album.name }}">
+                            <img class="card-img-top"
+                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
+                                 alt="{{ album.name }}">
                             <div class="card-body">
                                 <h4 class="card-title">{{ album.name }}</h4>
                                 <p class="card-text">{{ album.description }}</p>
                                 <p class="card-text">Price : {{ album.price }}€</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        {{ btn.btn_card(true, path('album_show', {'id': album.id}), 'primary', 'View', 'view') }}
-                                        {{ btn.btn_card('ROLE_EDITOR_ALBUM', path('album_edit', {'id': album.id}), 'success', 'Edit', 'edit') }}
-                                        {{ btn.btn_card('ROLE_MANAGER_ALBUM', path('album_delete', {'id': album.id}), 'danger', 'Delete', 'delete') }}
+                                        {{ btn.btn_card(true, path('album_show', {'id': album.id}), 'primary', 'view', 'View') }}
+                                        {{ btn.btn_card('ROLE_EDITOR_ALBUM', path('album_edit', {'id': album.id}), 'success', 'edit', 'Edit') }}
+                                        {{ btn.btn_card('ROLE_MANAGER_ALBUM', path('album_delete', {'id': album.id}), 'danger', 'delete', 'Delete') }}
                                     </div>
                                     <small class="text-muted">{{ album.category }}</small>
                                 </div>
@@ -43,11 +45,10 @@
                     </div>
                 {% else %}
                     <div class="alert alert-danger" role="alert">
-                        No records found
+                        {{ 'No records found'|trans }}
                     </div>
                 {% endfor %}
             </div>
-
         </div>
     </div>
 {% endblock %}

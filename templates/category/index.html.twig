@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
+{% import '/extra/macro/btn.html.twig' as btn %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}{{ 'Categories'|trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-12">
             <section class="jumbotron text-center">
                 <div class="container">
-                    <h1>Category</h1>
-                    <p class="lead text-muted">You can manage categories here.</p>
+                    <h1>{{ 'Categories'|trans }}</h1>
+                    <p class="lead text-muted">{{ 'You can manage categories here.'|trans }}</p>
                     <p>
-                        <a href="{{ path('category_new') }}" class="btn btn-outline-primary my-2">Create new</a>
+                        {#<a href="{{ path('category_new') }}" class="btn btn-outline-primary my-2">Create new</a>#}
+                        {{ btn.btn_card(true, path('category_new'), 'primary', 'Create new', 'Create New') }}
                     </p>
                 </div>
             </section>
@@ -18,12 +20,12 @@
     </div>
     <table class="table table-hover">
         <thead class="thead-dark">
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>{{ 'Name'|trans }}</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for category in categories %}
@@ -32,17 +34,16 @@
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
                 <td>
-                    <a href="{{ path('category_show', {'id': category.id}) }}" class="btn btn-sm btn-outline-info">show</a>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-sm btn-outline-success">edit</a>
+                    {{ btn.btn_card(true, path('category_show', {'id': category.id}), 'info', 'show', 'Show') }}
+                    {{ btn.btn_card(true, path('category_edit', {'id': category.id}), 'success', 'edit', 'Edit') }}
+                    {{ btn.btn_card(true, path('category_delete', {'id': category.id}), 'danger', 'delete', 'Delete') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">{{ 'No records found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('category_new') }}" class="btn btn-sm btn-outline-primary">Create new</a>
 {% endblock %}

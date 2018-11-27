@@ -2,8 +2,8 @@
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ album.id) }}">
     <div class="alert alert-danger" role="alert">
-        Are you sure to delete '{{ album.name }}' ?
+        {{ 'Are you sure to delete'|trans }} '{{ album.name }}' ?
     </div>
-    <a href="{{ path('album_index') }}" class="btn btn-sm btn-outline-secondary">Cancel</a>
-    <button class="btn btn-sm btn-outline-danger">Delete</button>
+    <a href="{{ path('album_index') }}" class="btn btn-sm btn-outline-secondary">{{ 'Cancel'|trans }}</a>
+    <button class="btn btn-sm btn-outline-danger">{{ 'Delete'|trans }}</button>
 </form>

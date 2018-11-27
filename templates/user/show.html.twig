@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}{{ 'User'|trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-12">
-            <h1>User</h1>
+            <h1>{{ 'User'|trans }}</h1>
             <table class="table table-bordered">
                 <tbody>
                 <tr>
@@ -13,11 +13,11 @@
                     <td>{{ user.id }}</td>
                 </tr>
                 <tr>
-                    <th>Name</th>
+                    <th>{{ 'Name'|trans }}</th>
                     <td>{{ user.email }}</td>
                 </tr>
                 <tr>
-                    <th>Rôle</th>
+                    <th>{{ 'Role'|trans }}</th>
                     {% for role in user.roles %}
                         <td>{{ role }}</td>
                     {% endfor %}
@@ -27,5 +27,5 @@
         </div>
     </div>
 
-    <a href="{{ path('user_index') }}" class="btn btn-sm btn-outline-primary">back to list</a>
+    <a href="{{ path('user_index') }}" class="btn btn-sm btn-outline-primary">{{ 'Back to list'|trans }}</a>
 {% endblock %}

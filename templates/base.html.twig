@@ -30,7 +30,7 @@
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             {{  btn.btn_main_menu(true, path("home"), "Home") }}
                             {{  btn.btn_main_menu(true, path("album_index"), "Albums") }}
-                            {{  btn.btn_main_menu("ROLE_MANAGER_CATEGORY", path("category_index"), "Categorie") }}
+                            {{  btn.btn_main_menu("ROLE_MANAGER_CATEGORY", path("category_index"), "Categories") }}
                             {{  btn.btn_main_menu("ROLE_MANAGER_USER", path("user_index"), "Users") }}
                             {% if app.user is null %}
                                 {{  btn.btn_main_menu(true, path("app_login"), "Login") }}
@@ -57,7 +57,7 @@
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
-                <a href="#">Back to top</a>
+                <a href="#">{{ 'Back to top'|trans }}</a>
             </p>
             <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
             <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting
