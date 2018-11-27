@@ -18,16 +18,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AlbumController extends AbstractController
 {
     /**
-     * @param AlbumRepository $albumRepository
      * @param CategoryRepository $categoryRepository
      * @return Response
      *
      * @Route("/", name="album_index", methods="GET")
      */
-    public function index(AlbumRepository $albumRepository, CategoryRepository $categoryRepository): Response
+    public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('album/index.html.twig', [
-            //'albums'        => $albumRepository->findAll(),
             'categories'    => $categoryRepository->findAll()
         ]);
     }
@@ -35,7 +33,7 @@ class AlbumController extends AbstractController
     /**
      * @param Request $request
      * @return Response
-     * @Security("has_role('ROLE_AUTHOR_ALBUM')")
+     * @throws \Exception
      *
      * @Route("/new", name="album_new", methods="GET|POST")
      */
@@ -56,7 +54,7 @@ class AlbumController extends AbstractController
 
         return $this->render('album/new.html.twig', [
             'album' => $album,
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
         ]);
     }
 
@@ -95,7 +93,7 @@ class AlbumController extends AbstractController
 
         return $this->render('album/edit.html.twig', [
             'album' => $album,
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
         ]);
     }
 

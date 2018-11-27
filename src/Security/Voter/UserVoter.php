@@ -20,8 +20,6 @@ class UserVoter extends Voter
      */
     protected function supports($attribute, $subject)
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, ['ROLE_EDITOR_USER', 'ROLE_MANAGER_USER']) && $subject instanceof User;
     }
 
@@ -68,6 +66,7 @@ class UserVoter extends Voter
      */
     protected function canManage($subject, TokenInterface $token): ?bool
     {
-        return true;
+        /** @var User $subject */
+        return $subject->getId() === $token->getUser()->getId();
     }
 }
