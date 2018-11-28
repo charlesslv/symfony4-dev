@@ -23,37 +23,6 @@ class AlbumRepository extends ServiceEntityRepository
         parent::__construct($registry, Album::class);
     }
 
-    // /**
-    //  * @return Album[] Returns an array of Album objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /**
-     * @param $name
-     * @return Album|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function findOneBySomeField($name): ?Album
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.name = :name')
-            ->setParameter('name', $name)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
     /**
      * @return mixed
      */
@@ -68,9 +37,10 @@ class AlbumRepository extends ServiceEntityRepository
 
     /**
      * @param $category
+     * @param $page
      * @return mixed
      */
-    public function findAllAlbumsByFilters($category)
+    public function findAllAlbumsByFilters($category, $page)
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a');
@@ -81,6 +51,30 @@ class AlbumRepository extends ServiceEntityRepository
                 ->setParameter('cat', $category);
         }
 
+        $qb->setMaxResults(3);
+        $qb->setFirstResult(($page - 1) * 3);
+
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param $category
+     * @param $page
+     * @return mixed
+     */
+    public function countAllAlbumsByFilters($category, $page)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a');
+
+        if ($category !== 'all') {
+            $qb->leftJoin('a.category', 'ac')
+                ->andWhere('ac.name = :cat')
+                ->setParameter('cat', $category);
+        }
+
+        $qb->setFirstResult(($page - 1) * 3);
+
+        return count($qb->getQuery()->getResult());
     }
 }

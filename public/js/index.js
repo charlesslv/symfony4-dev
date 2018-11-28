@@ -14,6 +14,7 @@ function initCategoriesFilter(append, page) {
 
   let data = new FormData();
   data.append('category', document.querySelector('.js-categories-filter[name=categories] option:checked').value);
+  data.append('page', page);
 
   const request = new XMLHttpRequest();
   request.open('POST', '/album/albums-filter', true);
@@ -25,18 +26,17 @@ function initCategoriesFilter(append, page) {
       } else {
         document.querySelector('#albums-results').innerHTML = request.responseText;
       }
-      /*
-            // show more
-            if(document.querySelector('.show-more')){
-              document.querySelector('.show-more').addEventListener('click', () => {
-                const button = document.querySelector('.show-more');
-                const page = button.getAttribute('data-page');
-                button.parentNode.removeChild(button);
 
-                self.initCategoriesFilter(true, page)
-              })
-            }
-            */
+      // show more
+      if(document.querySelector('.show-more')){
+        document.querySelector('.show-more').addEventListener('click', () => {
+          const button = document.querySelector('.show-more');
+          const page = button.getAttribute('data-page');
+          button.parentNode.removeChild(button);
+
+          initCategoriesFilter(true, page)
+        })
+      }
     }
   };
 

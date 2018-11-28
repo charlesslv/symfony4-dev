@@ -4,7 +4,7 @@
 {% block title %}Albums{% endblock %}
 
 {% block body %}
-    <div class="row">
+    <div class="row" style="margin-bottom: 2%;">
         <div class="col-12">
             <section class="jumbotron text-center">
                 <div class="container">
@@ -14,6 +14,14 @@
                         {#<a href="{{ path('album_new') }}" class="btn btn-primary my-2">Create new</a>#}
                         {{ btn.btn_card('ROLE_AUTHOR_ALBUM', path('album_new'), 'primary', 'Create new', 'Create New') }}
                     </p>
+
+                    <label for="categories">Select a category :</label>
+                    <select id="categories" name="categories" class="js-categories-filter custom-select">
+                        <option value="all" selected>{{ 'All categories'|trans }}</option>
+                        {% for category in categories %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </section>
         </div>
@@ -21,17 +29,6 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="row">
-                <div class="col">
-                    <label for="categories">Select a category :</label>
-                    <select id="categories" name="categories" class="js-categories-filter">
-                        <option value="all" selected>All categories</option>
-                        {% for category in categories %}
-                            <option value="{{ category.name }}">{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
             <div class="row" id="albums-results">
 
             </div>
