@@ -131,10 +131,10 @@ class AlbumController extends AbstractController
      */
     public function albums(Request $request, AlbumRepository $albumRepository): Response
     {
-        $category     = $request->get('category');
+        $category   = $request->get('category');
         $page       = !empty($request->get('page')) ? $request->get('page') : 1;
 
-        $count = $albumRepository->countAllAlbumsByFilters($category, $page + 1);
+        $count  = $albumRepository->countAllAlbumsByFilters($category, $page + 1);
         $albums = $albumRepository->findAllAlbumsByFilters($category, $page);
 
         return $this->render('album/albums.html.twig', [
