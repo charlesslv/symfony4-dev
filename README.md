@@ -7,6 +7,8 @@ Small and simply project to test new features of Symfony 4.
 
 > **Copy/Past .env.dist and rename it to .env then edit it to add connection information of your database.**
 
+> **Create folders public/uploads/covers**
+
 Install project
 ```sh
 make first-install
