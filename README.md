@@ -22,4 +22,3 @@ make help
 
 ### Test as author
 ?_switch_user=author@gmail.com
-

@@ -8,6 +8,8 @@ use App\Repository\AlbumRepository;
 use App\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,7 +46,23 @@ class AlbumController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $file */
+            $file       = $album->getImage();
+            $fileName   = $this->generateUniqueFileName() . '.' . $file->guessExtension();
+
+            try {
+                $file->move(
+                    $this->getParameter('covers_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                dd($e->getMessage());
+            }
+
+            $album->setImage($fileName);
             $album->setCreateAt(new \DateTime());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($album);
             $em->flush();
@@ -86,9 +104,26 @@ class AlbumController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $file */
+            $file       = $album->getImage();
+            $fileName   = $this->generateUniqueFileName() . '.' . $file->guessExtension();
+
+            try {
+                $file->move(
+                    $this->getParameter('covers_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                dd($e->getMessage());
+            }
+
+            $album->setImage($fileName);
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('album_index', ['id' => $album->getId()]);
+            return $this->redirectToRoute('album_index', [
+                'id' => $album->getId()
+            ]);
         }
 
         return $this->render('album/edit.html.twig', [
@@ -142,5 +177,13 @@ class AlbumController extends AbstractController
             'has_next_page' => $count > 0,
             'next_page'     => $page + 1
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
     }
 }
