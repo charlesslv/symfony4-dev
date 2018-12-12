@@ -56,6 +56,13 @@ class Album
     private $createAt;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Image()
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -156,5 +163,21 @@ class Album
         $this->createAt = $createAt;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 }

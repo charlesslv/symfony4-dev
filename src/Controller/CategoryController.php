@@ -25,7 +25,9 @@ class CategoryController extends AbstractController
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
-        return $this->render('category/index.html.twig', ['categories' => $categoryRepository->findAll()]);
+        return $this->render('category/index.html.twig', [
+            'categories' => $categoryRepository->findAll()
+        ]);
     }
 
     /**
@@ -64,7 +66,9 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category): Response
     {
-        return $this->render('category/show.html.twig', ['category' => $category]);
+        return $this->render('category/show.html.twig', [
+            'category' => $category
+        ]);
     }
 
     /**

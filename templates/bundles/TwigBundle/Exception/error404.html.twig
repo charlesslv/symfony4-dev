@@ -1,0 +1,15 @@
+{% import '/extra/macro/btn.html.twig' as btn %}
+{% extends 'base.html.twig' %}
+
+{% block title %}404{% endblock %}
+
+{% block body %}
+    <div class="px-12 py-8">
+        <h1>Page not found</h1>
+
+        <p class="text-sm">
+            The requested page couldn't be located. Checkout for any URL
+            misspelling or {{ btn.btn_card(true, path('home'), 'primary', 'home', 'Return to homepage') }}
+        </p>
+    </div>
+{% endblock %}
