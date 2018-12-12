@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error{% endblock %}
+
+{% block body %}
+    <div class="px-12 py-8">
+        <h1>Something went wrong.</h1>
+
+        <p class="text-sm">
+            The request couldn't be handled. Checkout for any URL
+            misspelling or <a href="{{ path('front_index') }}">return to the homepage</a>.
+        </p>
+    </div>
+{% endblock %}
