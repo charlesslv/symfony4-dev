@@ -56,9 +56,8 @@ class Album
     private $createAt;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Image()
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $image;
 
