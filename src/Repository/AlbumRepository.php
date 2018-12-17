@@ -51,6 +51,7 @@ class AlbumRepository extends ServiceEntityRepository
                 ->setParameter('cat', $category);
         }
 
+        $qb->orderBy('a.createAt', 'DESC');
         $qb->setMaxResults(3);
         $qb->setFirstResult(($page - 1) * 3);
 
@@ -73,6 +74,7 @@ class AlbumRepository extends ServiceEntityRepository
                 ->setParameter('cat', $category);
         }
 
+        $qb->orderBy('a.createAt', 'DESC');
         $qb->setFirstResult(($page - 1) * 3);
 
         return count($qb->getQuery()->getResult());
