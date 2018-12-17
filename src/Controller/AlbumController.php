@@ -145,6 +145,7 @@ class AlbumController extends AbstractController
         $id = $album->getId();
 
         if ($this->isCsrfTokenValid($id, $request->request->get('_token'))) {
+            unlink('../public/uploads/covers/' . $album->getImage());
             $em = $this->getDoctrine()->getManager();
             $em->remove($album);
             $em->flush();
