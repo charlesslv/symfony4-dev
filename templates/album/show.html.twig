@@ -30,6 +30,12 @@
                     <th>{{ 'Category'|trans }}</th>
                     <td>{{ album.category }}</td>
                 </tr>
+                {% if album.image != "" %}
+                    <tr>
+                        <th>{{ 'Picture'|trans }}</th>
+                        <td><img class="card-img-top" src="{{ asset('uploads/covers/' ~ album.image) }}" alt="{{ album.name }}"></td>
+                    </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>
