@@ -4,8 +4,10 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -28,27 +30,28 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
     use TargetPathTrait;
 
     /**
-     * @var EntityManagerInterface $entityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
     /**
-     * @var RouterInterface $router
+     * @var RouterInterface
      */
     private $router;
 
     /**
-     * @var CsrfTokenManagerInterface $csrfTokenManager
+     * @var CsrfTokenManagerInterface
      */
     private $csrfTokenManager;
 
     /**
-     * @var UserPasswordEncoderInterface $passwordEncoder
+     * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
 
     /**
      * AppCustomAuthenticator constructor.
+     *
      * @param EntityManagerInterface $entityManager
      * @param RouterInterface $router
      * @param CsrfTokenManagerInterface $csrfTokenManager
@@ -124,8 +127,8 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
      * @param Request $request
      * @param TokenInterface $token
      * @param string $providerKey
-     * @return null|RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
+     * @return null|RedirectResponse|Response
+     * @throws Exception
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {

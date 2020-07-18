@@ -14,12 +14,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserFixtures extends Fixture
 {
     /**
-     * @var $encoder
+     * @var UserPasswordEncoderInterface
      */
     private $encoder;
 
     /**
      * UserFixtures constructor.
+     *
      * @param UserPasswordEncoderInterface $encoder
      */
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -53,7 +54,7 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail("user@gmail.com");
         $user->setPassword($this->encoder->encodePassword($user, "user"));
-        $user->setRoles([]);
+        $user->setRoles(["ROLE_USER"]);
         $manager->persist($user);
 
         $manager->flush();

@@ -13,7 +13,7 @@ use Twig\TwigFunction;
 class TypeCheckerExtension extends AbstractExtension
 {
     /**
-     * @return array
+     * @return array|TwigFunction[]
      */
     public function getFunctions(): array
     {

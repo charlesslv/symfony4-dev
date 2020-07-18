@@ -7,6 +7,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class User
+ * @package App\Entity
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
@@ -39,6 +42,14 @@ class User implements UserInterface
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->roles    = ['ROLE_USER'];
+    }
 
     /**
      * @return int|null

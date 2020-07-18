@@ -6,6 +6,8 @@ use App\Entity\Album;
 use App\Form\AlbumType;
 use App\Repository\AlbumRepository;
 use App\Repository\CategoryRepository;
+use DateTime;
+use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -15,6 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * Class AlbumController
+ * @package App\Controller
+ *
  * @Route("/album")
  */
 class AlbumController extends AbstractController
@@ -35,7 +40,7 @@ class AlbumController extends AbstractController
     /**
      * @param Request $request
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      *
      * @Route("/new", name="album_new", methods="GET|POST")
      */
@@ -61,7 +66,7 @@ class AlbumController extends AbstractController
             }
 
             $album->setImage($fileName);
-            $album->setCreateAt(new \DateTime());
+            $album->setCreateAt(new DateTime());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($album);
