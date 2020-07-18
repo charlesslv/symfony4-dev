@@ -6,6 +6,7 @@ use App\Entity\Album;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Exception;
 use Faker\Factory;
 
 /**
@@ -16,7 +17,7 @@ class AlbumFixture extends Fixture implements DependentFixtureInterface
 {
     /**
      * @param ObjectManager $manager
-     * @throws \Exception
+     * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
