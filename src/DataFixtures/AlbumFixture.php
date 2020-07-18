@@ -3,21 +3,19 @@
 namespace App\DataFixtures;
 
 use App\Entity\Album;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Exception;
 use Faker\Factory;
 
 /**
  * Class AlbumFixture
  * @package App\DataFixtures
  */
-class AlbumFixture extends Fixture implements DependentFixtureInterface
+class AlbumFixture extends Fixture
 {
     /**
      * @param ObjectManager $manager
-     * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
@@ -29,7 +27,7 @@ class AlbumFixture extends Fixture implements DependentFixtureInterface
             $album->setDescription($faker->realText('500'));
             $album->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 0.99, $max = 65));
             $album->setCategory($this->getReference("CAT_" . mt_rand(1, 3)));
-            $album->setCreateAt(new \DateTime());
+            $album->setCreateAt(new DateTime());
             $manager->persist($album);
         }
 

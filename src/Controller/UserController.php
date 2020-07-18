@@ -13,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
 /**
  * Class UserController
  * @package App\Controller
@@ -77,7 +76,9 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', ['user' => $user]);
+        return $this->render('user/show.html.twig', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -106,7 +107,9 @@ class UserController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('user_index', ['id' => $user->getId()]);
+            return $this->redirectToRoute('user_index', [
+                'id' => $user->getId()
+            ]);
         }
 
         return $this->render('user/edit.html.twig', [
